@@ -32,7 +32,7 @@ const _counterReducer = createReducer(
 );
 
 export function counterReducer (state: any, action: any) {
-  console.log(`state: ${state}, action-name: ${action.type}`);
+  //console.log(`state: ${state}, action-name: ${action.type}`);
   return _counterReducer(state, action);
 }
 

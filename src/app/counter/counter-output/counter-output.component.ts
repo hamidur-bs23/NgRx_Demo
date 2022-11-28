@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {CounterState} from "../state/counter.state";
-import {Subject, takeUntil, tap} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
+import {selectCounter} from "../state/counter.selectors";
 
 @Component({
   selector: 'app-counter-output',
@@ -13,14 +14,15 @@ export class CounterOutputComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();
 
 
-  constructor(private store: Store<CounterState>) { }
+  constructor(private store: Store<CounterState>) {
+  }
 
   ngOnInit(): void {
-    this.store.select('counter').pipe(
-      takeUntil(this.destroy$),
-      tap(console.log)
-    ).subscribe((data: CounterState) => {
-      this.counter = data.counter;
+    this.store.select(selectCounter).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(counter => {
+      console.log("counter-output -> counter");
+      this.counter = counter;
     });
   }
 
