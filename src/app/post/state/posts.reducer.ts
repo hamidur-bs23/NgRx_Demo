@@ -1,23 +1,20 @@
-import {initialPostsState, postsState} from "./posts.state";
+import {initialPostsState, PostsState} from "./postsState";
 import {createReducer, on} from "@ngrx/store";
 import {addPostAction} from "./posts.actions";
 
 const _postsReducer = createReducer(
   initialPostsState,
   on(addPostAction, (state, action) => {
-    debugger;
-    console.log(action.type, state);
+    const id = state.posts.length + 1;
 
-    const newState: postsState = {
-       ...state
+    const newState: PostsState = {
+       posts: [...state.posts,
+         {
+           id: id,
+           title: action.title + id,
+           description: action.description + id
+         }],
     };
-
-    newState.posts.push({
-      id: state.posts.length + 1,
-      title: action.name,
-      description: action.description
-    });
-
     return newState;
   }),
 

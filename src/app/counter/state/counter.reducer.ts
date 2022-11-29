@@ -1,28 +1,28 @@
 import {createReducer, on} from "@ngrx/store";
-import {customIncrementAction, decrementAction, incrementAction, resetAction} from "./counter.actions";
+import * as CounterGroupActions from "./counter.actions";
 import {initialCounterState} from "./counter.state";
 
 const _counterReducer = createReducer(
   initialCounterState,
-  on(incrementAction, (state) => {
+  on(CounterGroupActions.incrementAction, (state) => {
     return {
       ...state,
       counter: state.counter + 1
     }
   }),
-  on(decrementAction, (state) => {
+  on(CounterGroupActions.decrementAction, (state) => {
     return {
       ...state,
       counter: state.counter - 1
     }
   }),
-  on(resetAction, (state) => {
+  on(CounterGroupActions.resetAction, (state) => {
     return {
       ...state,
       counter: 0
     }
   }),
-  on(customIncrementAction, (state, action) => {
+  on(CounterGroupActions.customIncrementAction, (state, action) => {
     return {
       ...state,
       customCounter: action.value,
@@ -32,8 +32,10 @@ const _counterReducer = createReducer(
 );
 
 export function counterReducer (state: any, action: any) {
-  //console.log(`store: ${store}, action-name: ${action.type}`);
+  console.log(`state: ${state}, action-name: ${action.type}`);
   return _counterReducer(state, action);
 }
+
+const counterFeatureName = "counter";
 
 

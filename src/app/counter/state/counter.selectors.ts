@@ -1,18 +1,23 @@
-import {createFeature, createReducer} from "@ngrx/store";
+import {createFeature} from "@ngrx/store";
 import {initialCounterState} from "./counter.state";
+import {AppState} from "../../store/app.state";
+import {counterReducer} from "./counter.reducer";
 
-const counterFeatureSelector = createFeature({
+const countersFeature = createFeature<AppState>({
   name: 'counter',
-  reducer: createReducer(initialCounterState),
+  reducer: counterReducer
 });
 
 export const {
-  selectCustomCounter,
-  selectCounter
-} = counterFeatureSelector;
+  name,
+  reducer,
+  selectCounterState,
+  // selectCustomCounter,
+  // selectCounter
+} = countersFeature;
 
-// const {
-//   selectProductsState, // type: MemoizedSelector<Record<string, any>, ProductsState>
-//   selectProducts, // type: MemoizedSelector<Record<string, any>, Product[]>
-//   selectSelectedId, // type: MemoizedSelector<Record<string, any, string | null>
-// } = productsFeature;
+//
+const selectCounter = (state: AppState) => state.counter;
+const selectPosts = (state: AppState) => state.posts;
+
+const selectSomething = createFeature

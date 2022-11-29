@@ -1,9 +1,6 @@
 import {createAction, props} from "@ngrx/store";
-import {Post} from "./posts.state";
+import {Post} from "./postsState";
 
 export const addPostAction = createAction(
   '[Post] post-count-total',
-  props<{
-    name: 'New post 103',
-    description: 'New description for 103'
-  }>());
+  props<Post>());

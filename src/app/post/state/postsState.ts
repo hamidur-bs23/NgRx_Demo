@@ -4,11 +4,11 @@ export interface Post {
   description: string
 }
 
-export interface postsState {
+export interface PostsState {
   posts: Post[]
 }
 
-export const initialPostsState: postsState = {
+export const initialPostsState: PostsState = {
   posts: [
     { id: 101, title: 'First post', description: '1st post description'},
     { id: 101, title: 'Second post', description: '2nd post description'},

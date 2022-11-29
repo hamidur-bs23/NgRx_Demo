@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CounterState} from "../state/counter.state";
 import {Store} from "@ngrx/store";
 import {customIncrementAction} from "../state/counter.actions";
 import {Subject, takeUntil} from "rxjs";
-import {selectCustomCounter} from "../state/counter.selectors";
+import {selectCounterState} from "../state/counter.selectors";
+import {AppState} from "../../store/app.state";
+import {CounterState} from "../state/counter.state";
 
 @Component({
   selector: 'app-custom-counter-input',
@@ -14,16 +15,16 @@ export class CustomCounterInputComponent implements OnInit, OnDestroy {
   customIncrementInput: number = 0;
   destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private store: Store<{ counter: CounterState }>) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
-    this.store.select(selectCustomCounter)
+    this.store.select<CounterState>(state => state.counter)
       .pipe(
         takeUntil(this.destroy$)
-      ).subscribe((customCounter: number) => {
+      ).subscribe(data => {
         console.log("custom-counter-input -> customCounter");
-        this.customIncrementInput = customCounter;
+        this.customIncrementInput = data.customCounter;
     })
   }
 
@@ -34,6 +35,7 @@ export class CustomCounterInputComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroy$.next();
     this.destroy$.complete();
   }
 
