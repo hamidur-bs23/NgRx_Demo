@@ -1,1 +1,26 @@
-<p>my-test-compo works!</p>
+<div>
+  <h2>Test Item</h2>
+  <p>{{ testItem.testName }} --- {{ testItem.testValue }}</p>
+</div>
+
+<div>
+  <form #testForm="ngForm" (ngSubmit)="onSubmit()">
+    <label for="formTestName">Name</label>
+    <input
+      type="text"
+      [(ngModel)]="formTestName"
+      name="formTestName"
+      id="formTestName"
+    />
+    <br />
+    <label for="formTestValue">Value</label>
+    <input
+      type="text"
+      [(ngModel)]="formTestValue"
+      name="formTestValue"
+      id="formTestValue"
+    />
+    <br />
+    <button type="submit">Update</button>
+  </form>
+</div>

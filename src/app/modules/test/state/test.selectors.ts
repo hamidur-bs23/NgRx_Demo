@@ -1,9 +1,3 @@
-import {testFeature} from "./test.features";
+import { testFeature } from './test.features';
 
-export const {
-  name,
-  reducer,
-  selectTestState,
-  selectName,
-  selectTestValue
-} = testFeature;
+export const { name, reducer, selectTestState } = testFeature;

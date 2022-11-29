@@ -1,10 +1,9 @@
 export interface CounterState {
-  customCounter: number,
-  counter: number
+  customCounter: number;
+  counter: number;
 }
-
 
 export const initialCounterState: CounterState = {
   customCounter: 100,
-  counter: 11111,
-}
+  counter: 1,
+};

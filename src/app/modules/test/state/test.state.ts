@@ -1,9 +1,9 @@
 export interface TestState {
-  name: string,
-  testValue: number
+  testName: string;
+  testValue: number;
 }
 
 export const initialTestState: TestState = {
-  name: 'Hello from Test State',
-  testValue: 2215
-}
+  testName: 'Hello from Test State',
+  testValue: 2215,
+};
